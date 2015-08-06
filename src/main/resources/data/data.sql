@@ -1,0 +1,14 @@
+INSERT INTO books (id, title, author, image, price) VALUES ( 1, 'Book Template', 'Sengkim','/Documents/Random/BookTemplate.jpg', 10.50);
+INSERT INTO books (id, title, author, image, price) VALUES ( 2, 'Sample Contract', 'Sengkim', '/Documents/Contracts/SampleContract.jpg', 10.50);
+INSERT INTO books (id, title, author, image, price) VALUES ( 3, 'Clustering with RabbitMQ', 'Sengkim', '/Documents/Random/ClusteringwithRabbitMQ.jpg', 10.50);
+INSERT INTO books (id, title, author, image, price) VALUES ( 4, 'Pro Spring Security Book', 'Sengkim', '/Documents/Random/SpringSecurity.jpg', 10.50);
+INSERT INTO books (id, title, author, image, price) VALUES ( 7, 'Seven is my lucky number', 'Sengkim','http://localhost:8080/myApp/static/7.jpg', 7.90);
+INSERT INTO books (id, title, author, image, price) VALUES ( 8, 'A Dance with Dragons', 'Sengkim','http://localhost:8080/myApp/static/8.jpg', 10.50);
+INSERT INTO books (id, title, author, image, price) VALUES ( 10, 'Ten ways to a better mind', 'Sengkim','http://localhost:8080/myApp/static/10.jpg', 15.30);
+INSERT INTO books (id, title, author, image, price) VALUES ( 42, 'The Hitch-hikers Guide to the Galaxy', 'Sengkim','http://localhost:8080/myApp/static/42.jpg', 3.30);
+INSERT INTO books (id, title, author, image, price) VALUES ( 200, 'Book title #200', 'Sengkim','http://localhost:8080/myApp/static/200.jpg', 200.00);
+INSERT INTO books (id, title, author, image, price) VALUES ( 201, 'Book title #201', 'Sengkim','http://localhost:8080/myApp/static/201.jpg', 201.00);
+INSERT INTO books (id, title, author, image, price) VALUES ( 202, 'Book title #202', 'Sengkim','http://localhost:8080/myApp/static/202.jpg', 202.00);
+INSERT INTO books (id, title, author, image, price) VALUES ( 203, 'Book title #203', 'Sengkim','http://localhost:8080/myApp/static/203.jpg', 203.00);
+INSERT INTO books (id, title, author, image, price) VALUES ( 204, 'Book title #204', 'Sengkim','http://localhost:8080/myApp/static/204.jpg', 204.00);
+INSERT INTO books (id, title, author, image, price) VALUES ( 205, 'Book title #205', 'Sengkim','http://localhost:8080/myApp/static/205.jpg', 205.00);

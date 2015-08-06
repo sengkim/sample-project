@@ -1,0 +1,1 @@
+CREATE TABLE books (id INTEGER PRIMARY KEY, title VARCHAR(255), author VARCHAR(100), image VARCHAR(255), price DOUBLE)
