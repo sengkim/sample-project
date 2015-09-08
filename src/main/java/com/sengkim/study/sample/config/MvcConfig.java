@@ -4,15 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.sql.DataSource;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,12 +19,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceView;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+/**
+ * @author sengkim
+ * @Date Sep 8, 2015
+ * @Email sengkim.it@gmail.com
+ */
 @EnableWebMvc
 @Configuration
+// @ImportResource(value = { "classpath:/spring-mybatis-config.xml" })
+@Import(PersistenceContext.class)
+@PropertySource(name = "application", value = { "classpath:/application.properties" })
 @ComponentScan(basePackages = { "com.sengkim.study.sample" })
 public class MvcConfig extends WebMvcConfigurerAdapter {
-
-
 
     @Override
     public void configureMessageConverters(
@@ -66,11 +70,14 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
         return bean;
     }
 
-    @Bean
-    public DataSource dataSource() {
-        return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("classpath:/data/schema.sql")
-                .addScript("classpath:/data/data.sql").build();
-    }
+    // uncomment the following block for embedded database
+    /*
+     * @Bean
+     * public DataSource dataSource() {
+     * return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("classpath:/data/schema.sql")
+     * .addScript("classpath:/data/data.sql").build();
+     * }
+     */
 
     @Bean
     public Map<String, String> sql() {

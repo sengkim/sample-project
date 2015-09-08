@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sengkim.study.sample.model.Employee;
+import com.sengkim.study.sample.domain.Employee;
 
 /**
  * Handles requests for the Employee service.

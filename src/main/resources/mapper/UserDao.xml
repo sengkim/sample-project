@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sengkim.study.sample.dao.UserDao">
+
+  <select id="findById" parameterType="long" resultType="com.sengkim.study.sample.domain.User">
+     SELECT 
+      id, 
+      email, 
+      password, 
+      firstname, 
+      lastname
+     FROM user 
+     WHERE ID = #{id}
+  </select>
+  <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
+   <resultMap type="User" id="UserResult">
+    <id property="id" column="id"/>
+    <result property="email" column="email"/>
+    <result property="password" column="password"/>
+    <result property="firstname" column="firstname"/>
+    <result property="lastname" column="lastname"/>   
+   </resultMap>
+  
+  <select id="getAll" resultMap="UserResult">
+   SELECT * FROM user
+  </select>
+  
+  <insert id="add" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+   INSERT INTO user(email, password, firstname, lastname)
+    VALUES(#{email}, #{password}, #{firstname}, #{lastname})
+  </insert>
+  
+  <update id="update" parameterType="User">
+    UPDATE user 
+    SET
+     PASSWORD= #{password},
+     FIRSTNAME = #{firstname},
+     LASTNAME = #{lastname}
+    WHERE ID = #{id}
+  </update>
+  
+  <delete id="remove" parameterType="long">
+    DELETE FROM user WHERE ID = #{id}
+  </delete>
+  
+</mapper>

@@ -12,7 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.sengkim.study.sample.model.Book;
+import com.sengkim.study.sample.domain.Book;
 
 @Repository
 public class BookDaoImpl implements BookDao {

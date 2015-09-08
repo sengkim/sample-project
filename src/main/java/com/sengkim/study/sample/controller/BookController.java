@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sengkim.study.sample.model.Book;
+import com.sengkim.study.sample.domain.Book;
 import com.sengkim.study.sample.service.BookService;
 import com.sengkim.study.sample.util.BookListWrapper;
 

@@ -2,7 +2,7 @@ package com.sengkim.study.sample.service;
 
 import java.util.List;
 
-import com.sengkim.study.sample.model.Book;
+import com.sengkim.study.sample.domain.Book;
 
 public interface BookService {
 

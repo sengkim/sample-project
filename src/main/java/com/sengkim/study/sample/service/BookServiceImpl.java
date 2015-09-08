@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sengkim.study.sample.dao.BookDao;
-import com.sengkim.study.sample.model.Book;
+import com.sengkim.study.sample.domain.Book;
 
 @Service
 public class BookServiceImpl implements BookService {

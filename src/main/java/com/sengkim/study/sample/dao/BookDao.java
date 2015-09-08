@@ -3,7 +3,7 @@ package com.sengkim.study.sample.dao;
 import java.sql.SQLDataException;
 import java.util.List;
 
-import com.sengkim.study.sample.model.Book;
+import com.sengkim.study.sample.domain.Book;
 
 public interface BookDao {
 

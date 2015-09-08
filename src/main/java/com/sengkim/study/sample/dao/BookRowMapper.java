@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.sengkim.study.sample.model.Book;
+import com.sengkim.study.sample.domain.Book;
 
 public class BookRowMapper implements RowMapper<Book> {
 

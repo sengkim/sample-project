@@ -17,7 +17,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.sengkim.study.sample.config.MvcConfig;
-import com.sengkim.study.sample.model.Book;
+import com.sengkim.study.sample.domain.Book;
 
 @EnableWebMvc
 @WebAppConfiguration

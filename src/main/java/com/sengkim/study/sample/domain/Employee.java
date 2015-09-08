@@ -1,4 +1,4 @@
-package com.sengkim.study.sample.model;
+package com.sengkim.study.sample.domain;
 
 import java.io.Serializable;
 import java.util.Date;
