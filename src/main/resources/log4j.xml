@@ -2,40 +2,96 @@
 <!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "log4j.dtd">
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
-	<!-- Appenders -->
-	<appender name="console" class="org.apache.log4j.ConsoleAppender">
-		<param name="Target" value="System.out" />
-		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
-		</layout>
-	</appender>
-	
-	<!-- Application Loggers -->
-	<logger name="com.sengkim.study.sample">
-		<level value="info" />
-	</logger>
-	
-	<!-- 3rdparty Loggers -->
-	<logger name="org.springframework.core">
-		<level value="info" />
-	</logger>	
-	
-	<logger name="org.springframework.beans">
-		<level value="info" />
-	</logger>
-	
-	<logger name="org.springframework.context">
-		<level value="info" />
-	</logger>
+  <!-- Appenders -->
+  <!-- <appender name="console" class="org.apache.log4j.ConsoleAppender"> 
+    <param name="Target" value="System.out" /> <layout class="org.apache.log4j.PatternLayout"> 
+    <param name="ConversionPattern" value="%-5p: %c - %m%n" /> </layout> </appender> -->
+  <appender class="org.apache.log4j.AsyncAppender" name="ASYNC">
+    <appender-ref ref="FILE" />
+    <appender-ref ref="CONSOLE" />
+  </appender>
 
-	<logger name="org.springframework.web">
-		<level value="info" />
-	</logger>
+  <appender class="org.apache.log4j.RollingFileAppender" name="FILE">
+    <param name="File" value="logs/sample-backend.log" />
+    <param name="MaxBackupIndex" value="10" />
+    <param name="MaxFileSize" value="10mb" />
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d{MM-dd HH:mm:ss,SSS} %-5p [%c{1}] %m%n" />
+    </layout>
+  </appender>
 
-	<!-- Root Logger -->
-	<root>
-		<priority value="info" />
-		<appender-ref ref="console" />
-	</root>
-	
+  <!-- ============================== -->
+  <!-- Append messages to the console -->
+  <!-- ============================== -->
+
+  <appender class="org.apache.log4j.ConsoleAppender" name="CONSOLE">
+    <param name="Threshold" value="ALL" />
+    <param name="Target" value="System.out" />
+
+    <layout class="org.apache.log4j.PatternLayout">
+      <!-- The default pattern: Date Priority [Category] Message\n -->
+      <param name="ConversionPattern" value="%d{ABSOLUTE} %-5p [%c{1}] %m%n" />
+    </layout>
+  </appender>
+
+  <!-- ================ -->
+  <!-- Limit categories -->
+  <!-- ================ -->
+  <category additivity="true" name="com.sengkim.study.sample">
+	<priority value="${log_level}" />
+  </category>
+  
+  <category additivity="true" name="java">
+    <priority value="INFO"/>
+  </category>
+  <category additivity="true" name="org.aspectj">
+    <priority value="INFO"/>
+  </category>
+  <category additivity="true" name="org.springframework">
+    <priority value="INFO"/>
+  </category>
+  
+  <category additivity="true" name="org.springframework.web.client.RestTemplate">
+    <priority value="${log_level}"/>
+  </category>
+     
+  <category additivity="true" name="org.springframework.ws.client.MessageTracing.received">
+    <priority value="${log_ws_level}"/>
+  </category>
+  
+  <category additivity="true" name="org.springframework.ws.server">
+    <priority value="${log_ws_level}"/>
+  </category>
+  
+  <category additivity="true" name="org.eclipse.jetty">
+    <priority value="ERROR"/>
+  </category>
+  <category additivity="true" name="org.mybatis.spring.mapper.ClassPathMapperScanner">
+    <priority value="INFO"/>
+  </category>
+  <category additivity="true" name="org.mybatis.spring.SqlSessionFactoryBean">
+    <priority value="INFO"/>
+  </category>
+  <category additivity="true" name="edu">
+    <priority value="INFO"/>
+  </category>
+  <category additivity="true" name="org">
+    <priority value="INFO"/>
+  </category>
+  <category additivity="true" name="net">
+    <priority value="INFO"/>
+  </category>
+  
+  <category additivity="true" name="org.slf4j"> 
+     <priority value="${log_level}"/> 
+  </category> 
+  
+  <!-- ======================= -->
+  <!-- Setup the Root category -->
+  <!-- ======================= -->
+
+  <root>
+    <appender-ref ref="ASYNC"/>
+  </root>
+
 </log4j:configuration>

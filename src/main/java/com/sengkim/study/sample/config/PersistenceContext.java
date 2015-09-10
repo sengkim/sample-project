@@ -12,7 +12,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -54,8 +54,9 @@ public class PersistenceContext {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource());
         sqlSessionFactory.setTypeAliasesPackage("com.sengkim.study.sample.domain");
-        sqlSessionFactory.setMapperLocations(new org.springframework.core.io.Resource[] { new ClassPathResource(
-                "/mapper/UserDao.xml") });
+        // sqlSessionFactory.setMapperLocations(new org.springframework.core.io.Resource[] { new ClassPathResource(
+        // "/mapper/UserDao.xml") });
+        sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mapper/*.xml"));
         sqlSessionFactory.setTypeHandlers(new CollectionStringTypeHandler[] { });
         return sqlSessionFactory.getObject();
     }
