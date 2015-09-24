@@ -62,7 +62,8 @@ public class PersistenceContext {
     	
     	String username = dbUri.getUserInfo().split(":")[0];
     	String password = dbUri.getUserInfo().split(":")[1];
-    	String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
+    	String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath() 
+    			+ "?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory";
     	
         BasicDataSource dataSource = new BasicDataSource();
         //dataSource.setDriverClassName(env.getProperty(PROPERTY_NAME_DB_DRIVER));
