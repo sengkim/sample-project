@@ -25,7 +25,7 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(value = "/dummy", method = RequestMethod.GET)
+    @RequestMapping(value = "users/dummy", method = RequestMethod.GET)
     public List<User> dummy() {
 
         List<User> users = new ArrayList<User>();

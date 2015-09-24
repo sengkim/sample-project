@@ -11,7 +11,7 @@
       password, 
       firstname, 
       lastname
-     FROM user 
+     FROM user_tb 
      WHERE ID = #{id}
   </select>
   <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
@@ -24,16 +24,16 @@
    </resultMap>
   
   <select id="getAll" resultMap="UserResult">
-   SELECT * FROM user
+   SELECT * FROM user_tb
   </select>
   
   <insert id="add" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-   INSERT INTO user(email, password, firstname, lastname)
+   INSERT INTO user_tb(email, password, firstname, lastname)
     VALUES(#{email}, #{password}, #{firstname}, #{lastname})
   </insert>
   
   <update id="update" parameterType="User">
-    UPDATE user 
+    UPDATE user_tb 
     SET
      PASSWORD= #{password},
      FIRSTNAME = #{firstname},
@@ -42,7 +42,7 @@
   </update>
   
   <delete id="remove" parameterType="long">
-    DELETE FROM user WHERE ID = #{id}
+    DELETE FROM user_tb WHERE ID = #{id}
   </delete>
   
 </mapper>

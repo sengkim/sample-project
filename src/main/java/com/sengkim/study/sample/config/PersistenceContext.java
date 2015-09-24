@@ -1,5 +1,8 @@
 package com.sengkim.study.sample.config;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
@@ -9,6 +12,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -27,6 +32,8 @@ import com.sengkim.study.sample.dao.typehandler.CollectionStringTypeHandler;
 @EnableTransactionManagement
 @MapperScan("com.sengkim.study.sample.dao")
 public class PersistenceContext {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(PersistenceContext.class);
 
     private static final String PROPERTY_NAME_DB_DRIVER = "jdbc.driver";
     private static final String PROPERTY_NAME_DB_HOST_AND_PORT = "jdbc.hostAndPort";
@@ -37,14 +44,31 @@ public class PersistenceContext {
     @Resource
     private Environment env;
 
+//    @Bean
+//    public DataSource dataSource() {
+//        BasicDataSource dataSource = new BasicDataSource();
+//        dataSource.setDriverClassName(env.getProperty(PROPERTY_NAME_DB_DRIVER));
+//        dataSource.setUrl("jdbc:mariadb://" + env.getProperty(PROPERTY_NAME_DB_HOST_AND_PORT) + "/"
+//                + env.getProperty(PROPERTY_NAME_DB_DATABASENAME) + "?zeroDateTimeBehavior=convertToNull");
+//        dataSource.setUsername(env.getProperty(PROPERTY_NAME_DB_USERNAME));
+//        dataSource.setPassword(env.getProperty(PROPERTY_NAME_DB_PASSWORD));
+//
+//        return dataSource;
+//    }
     @Bean
-    public DataSource dataSource() {
+    public DataSource dataSource() throws URISyntaxException {
+    	LOG.info(">>>>>>> DATABASE_URL: {}", System.getenv("DATABASE_URL"));
+    	URI dbUri = new URI(System.getenv("DATABASE_URL"));
+    	
+    	String username = dbUri.getUserInfo().split(":")[0];
+    	String password = dbUri.getUserInfo().split(":")[1];
+    	String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ":" + dbUri.getPort() + dbUri.getPath();
+    	
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(env.getProperty(PROPERTY_NAME_DB_DRIVER));
-        dataSource.setUrl("jdbc:mariadb://" + env.getProperty(PROPERTY_NAME_DB_HOST_AND_PORT) + "/"
-                + env.getProperty(PROPERTY_NAME_DB_DATABASENAME) + "?zeroDateTimeBehavior=convertToNull");
-        dataSource.setUsername(env.getProperty(PROPERTY_NAME_DB_USERNAME));
-        dataSource.setPassword(env.getProperty(PROPERTY_NAME_DB_PASSWORD));
+        //dataSource.setDriverClassName(env.getProperty(PROPERTY_NAME_DB_DRIVER));
+        dataSource.setUrl(dbUrl);
+        dataSource.setUsername(username);
+        dataSource.setPassword(password);
 
         return dataSource;
     }
@@ -67,7 +91,7 @@ public class PersistenceContext {
     }
 
     @Bean
-    public DataSourceTransactionManager transactionManager() {
+    public DataSourceTransactionManager transactionManager() throws URISyntaxException {
         DataSourceTransactionManager transactionManager = new DataSourceTransactionManager();
         transactionManager.setDataSource(dataSource());
         return transactionManager;
