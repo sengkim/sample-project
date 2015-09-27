@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
@@ -26,7 +27,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
  */
 @EnableWebMvc
 @Configuration
-// @ImportResource(value = { "classpath:/spring-mybatis-config.xml" })
+@ImportResource(value = { "classpath:/security-context.xml" })
 @Import(PersistenceContext.class)
 @PropertySource(name = "application", value = { "classpath:/application.properties" })
 @ComponentScan(basePackages = { "com.sengkim.study.sample" })
